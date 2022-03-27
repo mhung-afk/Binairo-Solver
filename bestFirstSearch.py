@@ -7,7 +7,7 @@ from queue import PriorityQueue
 import psutil
 import os
 
-f = open('testcase14x14.txt', 'r')
+f = open('testcase14x14_3.txt', 'r')
 inputData = f.read().split('\n')
 
 # get level
@@ -106,13 +106,11 @@ class BinairoSolver:
                     
                     t_matrix[r][c] = 'x'
                     tryX = self.funcH(t_matrix, r, c, 'x')
-                    if tryX > 0:
-                        newStates.append({'r':r,'c':c,'op':'x','score':tryX,'step':step+1})
+                    newStates.append({'r':r,'c':c,'op':'x','score':tryX,'step':step+1})
                 
                     t_matrix[r][c] = 'o'
                     tryO = self.funcH(t_matrix, r, c, 'o')
-                    if tryO > 0:
-                        newStates.append({'r':r,'c':c,'op':'o','score':tryO,'step':step+1})
+                    newStates.append({'r':r,'c':c,'op':'o','score':tryO,'step':step+1})
                 
                 elif tryX and not tryO:
                     return [{'r':r,'c':c,'op':'x','score':0,'step':step+1}]
