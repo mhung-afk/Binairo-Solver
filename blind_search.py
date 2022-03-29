@@ -7,21 +7,6 @@ import psutil
 import os
 
 
-f = open('testcase6x6.txt', 'r')
-inputData = f.read().split('\n')
-
-# get level
-inputLevel = len(inputData)
-
-# get problem
-inputMatrix = []
-for i in range(len(inputData)):
-    inputRow = []
-    for j in range(inputLevel):
-        inputRow.append(inputData[i][j])
-    inputMatrix.append(inputRow)
-
-
 class BinairoSolver:
     def __init__(self, _matrix: list, _level: int):
         self.matrix = _matrix
@@ -149,18 +134,26 @@ def process_memory():
     return mem_info.rss
 
 
-start = default_timer()
+with open('testcase8x8.txt', 'r') as f:
+    inputData = f.read().split('\n')
 
-memBefore = process_memory()
+    # get level
+    inputLevel = len(inputData)
 
-solver = BinairoSolver(inputMatrix, inputLevel)
+    # get problem
+    inputMatrix = []
+    for i in range(len(inputData)):
+        inputRow = []
+        for j in range(inputLevel):
+            inputRow.append(inputData[i][j])
+        inputMatrix.append(inputRow)
 
-solver.solve()
+    start = default_timer()
+    solver = BinairoSolver(inputMatrix, inputLevel)
+    memBefore = process_memory()
+    solver.solve()
+    memAfter = process_memory()
+    stop = default_timer()
 
-memAfter = process_memory()
-print('Usage Memory:', memAfter - memBefore, 'bytes')
-
-stop = default_timer()
-print('Time To Run: ', stop - start)
-
-# solver.printLog()
+    print('Usage Memory:', memAfter - memBefore, 'bytes')
+    print('Time To Run: ', stop - start)
